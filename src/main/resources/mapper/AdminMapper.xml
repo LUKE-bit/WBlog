@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.myblog.dao.AdminMapper">
+    <select id="findUserByName" parameterType="string" resultType="userInfo">
+      select * from blog_user where email = #{userName}
+    </select>
+    <insert id="register" parameterType="userInfo">
+        INSERT INTO blog_user ( email, login_password, nick_name, login_role )VALUES(#{email},#{login_password},#{nick_name},#{login_role})
+    </insert>
+    <select id="getEmailByUserName" parameterType="string" resultType="string">
+        SELECT email FROM blog_user WHERE nick_name = #{username}
+    </select>
+    <update id="updateStatus" parameterType="string">
+            UPDATE blog_user SET `status` = 1 WHERE nick_name = #{nick_name}
+        </update>
+    <insert id="setUserView" parameterType="string">
+          INSERT INTO blog_user_view(nick_name)VALUES(#{nick_name})
+    </insert>
+<select id="isRegistered" parameterType="string" resultType="int">
+        select count(*) FROM blog_user WHERE nick_name = #{nick_name} and status = 1
+    </select>
+
+<select id="isEmail" parameterType="string" resultType="int">
+        SELECT COUNT(email) FROM blog_user WHERE email = #{email}
+    </select>
+</mapper>

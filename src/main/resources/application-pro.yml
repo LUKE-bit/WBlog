@@ -1,0 +1,8 @@
+server:
+  port: 7777
+logging:
+  level:
+    root: info
+    com.wang.myblog: error
+  file:
+    name: log/blog.log

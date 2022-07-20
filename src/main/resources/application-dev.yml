@@ -1,0 +1,6 @@
+logging:
+  level:
+    root: info
+    com.wang.Myblog: debug
+  file:
+    name: log/blog.log

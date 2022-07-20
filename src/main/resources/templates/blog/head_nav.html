@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="blog-head-nav(path)" class="am-topbar">
+    <h1 class="am-topbar-brand">
+        <a th:href="@{/}"><b>W</b>Blog</a>
+    </h1>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+            data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+            class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse am-topbar-right" id="doc-topbar-collapse">
+        <ul class="am-nav am-nav-pills am-topbar-nav">
+            <li sec:authorize="anonymous" ><a href="/register">注册</a></li>
+            <li sec:authorize="anonymous" ><a href="/login">登录</a></li>
+            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" ><a href="/logout">当前用户(点击退出)：<span sec:authentication="name"></span></a></li>
+            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/admin/index}" target="_self" style="color: red">控制台</a></li>
+            <li th:class="${path} == 'archive'?'am-active':' '"><a th:href="@{/archive}" target="_self">归档</a></li>
+            <li th:class="${path} == 'sorts'?'am-active':' '"><a th:href="@{/all_sort}" target="_self">分类</a></li>
+            <li><a th:href="@{https://github.com/LUKE-bit}" target="_blank">GitHub</a></li>
+            <li><a th:href="@{https://blog.csdn.net/passport404?spm=1000.2115.3001.5343}" target="_blank">CSDN</a></li>
+        </ul>
+    </div>
+</header>
+</html>
